@@ -72,6 +72,8 @@ body {
     font-size: 30px;
     display: flex;
     align-items: center;
+    user-select: none;
+    cursor: pointer;
 }
 
 .wide {
