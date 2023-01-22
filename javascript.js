@@ -3,6 +3,7 @@ console.log("code works");
 let a = 0;
 let b = 0;
 let operation = "";
+let memory = "";
 
 // main logic
 function operate(a, b, operation) {
@@ -28,16 +29,44 @@ function changeBot(cont) {
 
 
 // event listeners
-function press(element) {
-    console.log(element.id);
-    changeTop(element.id);
-    changeBot(element.id);
+function pressOperation(element) { // elements
+    if (memory == "") {
+        return;
+    } 
+    
+    
+
 }
 
-let buttons = document.querySelectorAll(".button");
+function pressNumber(number) { // numbers
 
-buttons.forEach((button) => {
-    button.addEventListener("click", () => press(button));
+    let length = memory.length;
+    memory += number.id;
+
+    changeBot(memory);
+    console.log(memory);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+let operations = document.querySelectorAll(".element");
+let numbers = document.querySelectorAll(".num");
+
+operations.forEach((operation) => {
+    operation.addEventListener("click", () => pressOperation(operation));
+});
+
+numbers.forEach((number) => {
+    number.addEventListener("click", () => pressNumber(number));
 });
 
 let topScreen = document.querySelector(".screenTop");
