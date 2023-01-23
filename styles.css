@@ -35,7 +35,7 @@ body {
     flex-direction: column;
     justify-content: center;
     gap: 30px;
-    font-family: 'Segment7Standard';
+    /*font-family: 'Segment7Standard';*/
     align-self: center;
 }
 
