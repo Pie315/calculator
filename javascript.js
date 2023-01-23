@@ -2,7 +2,7 @@ console.log("code works");
 
 let a = 0;
 let b = 0;
-let operation = "";
+let operator = undefined;
 let memoryBot = "";
 let last = "";
 let decimal = false;
@@ -56,8 +56,7 @@ function clearMem() {
 function deleteMem() {
     let length = memoryBot.length;
 
-    console.log(memoryBot[length]);
-    switch (memoryBot[length]) {
+    switch (memoryBot[length-1]) {
         case "+":
             operator = undefined;
             break;
@@ -71,7 +70,9 @@ function deleteMem() {
             operator = undefined;
             break;
         case ".":
-            decimal=false;
+            decimal = false;
+            break;
+        default:
             break;
     }
 
@@ -93,24 +94,41 @@ function pressOperation(element) { // elements
     } else if (element.id == "=") {
         calculate();
         return;
-    } else if ( element.id == ".") {
+    }
+    if (element.id == ".") {
         if (decimal == true) {
             return;
         }
         decimal = true;
     }
 
+    if (operator != undefined) {
+        return;
+    }
+
+    switch(element.id) {
+        case "+":
+            operator = "+";
+            break;
+        case "-":
+            operator = "-";
+            break;
+        case "/":
+            operator = "/";
+            break;
+        case "x":
+            operator = "x";
+            break;    
+    }
+
     memoryBot += element.id;
     changeBot(memoryBot);
-
 }
 
 function pressNumber(number) { // numbers
     memoryBot += number.id;
 
     changeBot(memoryBot);
-
-
 }
 
 
