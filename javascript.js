@@ -12,25 +12,41 @@ let botScreenContent = "";
 
 // main logic
 function operate(a, b, operation) {
+    let out = undefined;
     switch(operation) {
         case "+": 
-            return (a + b);
+            out = (a + b);
+            break;
         case "x":
-            return (a * b);
+            out = (a * b);
+            break;
         case "-":
-            return (a - b);
+            out = (a - b);
+            break;
         case "/":
-            return (a / b);
+            out = (a / b);
+            break;
     }
+    out = (Math.round(out * 1000))/1000;
+    return out;
 }
 
 function calculate() {
-    changeTop(memoryBot);
 
+    if (operator == undefined) {
+        return;
+    }
 
+    const length = memoryBot.length;
+    const arrayFrom = Array.from(memoryBot);
 
+    const isOperator = (element) => element == operator;
+    const location = arrayFrom.findIndex(isOperator);
 
+    let a = Number(memoryBot.slice(0, location));
+    let b = Number(memoryBot.slice(location + 1, length));
 
+    changeTop(operate(a, b, operator));
 }
 
 
