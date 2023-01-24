@@ -24,16 +24,21 @@ function operate(a, b, operation) {
             out = (a - b);
             break;
         case "/":
+            if (b == 0) {
+                clearMem();
+                changeBot("Are you serious? Really?");
+                return;
+            }
             out = (a / b);
             break;
     }
-    out = (Math.round(out * 1000))/1000;
+    out = (Math.round(out * 1000))/1000; // rounds to the thousands place
     return out;
 }
 
 function calculate() {
 
-    if (operator == undefined) {
+    if (operator == undefined) { // only runs when there is an operator selected
         return;
     }
 
@@ -46,7 +51,13 @@ function calculate() {
     let a = Number(memoryBot.slice(0, location));
     let b = Number(memoryBot.slice(location + 1, length));
 
-    changeTop(operate(a, b, operator));
+    const result = operate(a, b, operator);
+
+    memoryBot = result;
+    operator = undefined;
+
+    changeTop(botScreenContent);
+    changeBot(result); 
 }
 
 
