@@ -51,7 +51,7 @@ function calculate() {
     let a = Number(memoryBot.slice(0, location));
     let b = Number(memoryBot.slice(location + 1, length));
 
-    const result = operate(a, b, operator);
+    const result = String(operate(a, b, operator));
 
     memoryBot = result;
     operator = undefined;
@@ -60,7 +60,11 @@ function calculate() {
     changeBot(result); 
 }
 
+function decimalAllowed() {
+    return;
 
+
+}
 
 // screens
 function changeTop(cont) {
@@ -157,17 +161,6 @@ function pressNumber(number) { // numbers
 
     changeBot(memoryBot);
 }
-
-
-
-
-
-
-
-
-
-
-
 
 let operations = document.querySelectorAll(".element");
 let numbers = document.querySelectorAll(".num");
