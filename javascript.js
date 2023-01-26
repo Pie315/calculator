@@ -8,6 +8,7 @@ let last = "";
 let decimal = false;
 let topScreenContent = "";
 let botScreenContent = "";
+let test = ['5', '9', '2', '.', '3', "."];
 
 
 // main logic
@@ -60,10 +61,45 @@ function calculate() {
     changeBot(result); 
 }
 
-function decimalAllowed() {
-    return;
+function checkFor(list, target) {
+    let number = 0;
+    list.forEach((index) => {
+        if (index == target) {
+            number++;
+        }
+    });
+    if (number > 1) {
+        return false;
+    } else {
+        return true;
+    }
+}
 
+function decimalAllowed(check, target) { // returns true if a decimal is allowed
+    
+    const length = check.length;
 
+    const arrayFrom = Array.from(check);
+
+    if (operator == undefined) {
+        console.log(checkFor(arrayFrom, target));
+        return checkFor(arrayFrom, target);
+    } else {
+        const isOperator = (element) => element == operator;
+        const location = arrayFrom.findIndex(isOperator);
+        
+        const b = (check.slice(location + 1, length));
+        const a = Array.from(b);
+        let outCome = checkFor(a, target);
+
+        if (outCome == true) {
+            changeBot(memoryBot+target);
+            botScreenContent+=target;
+            memoryBot+=target;
+        }
+
+        return outCome;
+    }
 }
 
 // screens
@@ -100,9 +136,6 @@ function deleteMem() {
         case "x":
             operator = undefined;
             break;
-        case ".":
-            decimal = false;
-            break;
         default:
             break;
     }
@@ -126,11 +159,9 @@ function pressOperation(element) { // elements
         calculate();
         return;
     }
-    if (element.id == ".") {
-        if (decimal == true) {
-            return;
-        }
-        decimal = true;
+
+    if ((element.id == ".")&&(decimalAllowed(memoryBot+".", ".") == false)) {
+        return; // id == . and not allowed 
     }
 
     if (operator != undefined) {
