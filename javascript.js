@@ -82,7 +82,6 @@ function decimalAllowed(check, target) { // returns true if a decimal is allowed
     const arrayFrom = Array.from(check);
 
     if (operator == undefined) {
-        console.log(checkFor(arrayFrom, target));
         return checkFor(arrayFrom, target);
     } else {
         const isOperator = (element) => element == operator;
